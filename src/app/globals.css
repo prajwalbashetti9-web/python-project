@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces Variable", "Georgia", serif;
+  --font-sans: "Inter Variable", "system-ui", sans-serif;
+  --font-mono: "JetBrains Mono Variable", "SFMono-Regular", monospace;
+
+  /* warm ink scale */
+  --color-ink-950: #0b0a08;
+  --color-ink-900: #12100d;
+  --color-ink-850: #171411;
+  --color-ink-800: #1e1a15;
+  --color-ink-700: #2a241d;
+
+  /* cream paper scale */
+  --color-cream-100: #f4eddd;
+  --color-cream-200: #ece2cb;
+  --color-cream-300: #e0d3b4;
+  --color-cream-400: #c4b596;
+  --color-cream-500: #a2947a;
+  --color-cream-600: #7d7160;
+
+  /* gilded accent */
+  --color-gilt-300: #f4c96e;
+  --color-gilt-400: #eab54e;
+  --color-gilt-500: #d99c33;
+  --color-gilt-600: #b57e22;
+
+  /* ember secondary */
+  --color-ember-400: #d97742;
+  --color-ember-500: #c95f2c;
+
+  /* http method coding */
+  --color-m-get: #56d99a;
+  --color-m-post: #eab54e;
+  --color-m-put: #6db9f0;
+  --color-m-delete: #ef7f8d;
+
+  --shadow-glow: 0 0 60px -12px rgba(234, 181, 78, 0.28);
+  --shadow-panel: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
+
+  --animate-blink: blink 1.06s step-end infinite;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-marquee: marquee 36s linear infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink-950);
+  color: var(--color-cream-100);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: rgba(234, 181, 78, 0.9);
+  color: #0b0a08;
+}
+
+/* ---- film grain overlay ------------------------------------------ */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- hairline ruled paper ---------------------------------------- */
+.ruled {
+  background-image:
+    linear-gradient(rgba(244, 237, 221, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 237, 221, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ---- custom scrollbar -------------------------------------------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-700) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-ink-700);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- terminal cursor --------------------------------------------- */
+.cursor-blink::after {
+  content: "▮";
+  margin-left: 2px;
+  color: var(--color-gilt-400);
+  animation: var(--animate-blink);
+}
+
+/* ---- focus ring --------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--color-gilt-400);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
